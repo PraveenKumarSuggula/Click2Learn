@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+/* BASE TEMPLATE CSS */
+#wrapper {
+    display: flex;
+}
+
+#wrapper #content-wrapper {
+    background-color: #f8f9fc;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+#wrapper #content-wrapper #content {
+    flex: 1 0 auto;
+}
+
+.text-primary {
+    color: orange !important;
+}
+
+.btn-primary {
+    color: #ffffff !important;
+    background-color: orange;
+    border-color: orange;
+}
+
+.bg-primary {
+    background-color: orange!important;
+}
+
+a {
+    color: orange !important;
+    text-decoration: none;
+}

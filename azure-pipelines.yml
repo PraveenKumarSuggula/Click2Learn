@@ -1,0 +1,43 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '16.x'
+
+  # Install and build frontend
+  - script: |
+      cd click2LearnInstructorClient  # Navigate to frontend directory
+      npm install
+      npm run build
+    displayName: 'Install Dependencies and Build Frontend'
+
+  # Install and start backend
+  - script: |
+      cd click2LearnBackend  # Navigate to backend directory
+      npm install
+      npm start
+    displayName: 'Install Dependencies and Start Backend'
+
+  # Publish build artifacts for frontend
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: '$(Build.SourcesDirectory)/click2LearnInstructorClient/build'
+      artifactName: 'frontend'
+
+  # Publish build artifacts for backend (if needed)
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: '$(Build.SourcesDirectory)/click2LearnBackend/build'
+      artifactName: 'backend'
